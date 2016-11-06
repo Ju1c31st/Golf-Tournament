@@ -9,7 +9,9 @@ import java.util.ArrayList;
  * and answer Questions T1, T2 and T3.
  * @author Scott McCallum, September 2016
  * Completed by:
+ * 44908415, Jonah Lee Skinner
  */
+
 
 public class Tournament {
 	
@@ -51,6 +53,11 @@ public class Tournament {
 	 * @param aHandicap
 	 */
 	public void enter(String aName, int aHandicap) {
+		ArrayList<String> playerName = new ArrayList<String>();
+		ArrayList<Integer> playerHandicap = new ArrayList<Integer>();
+		playerName.add(aName);
+		playerHandicap.add(aHandicap);
+		
 		// Supply this code!
 	}
 	
@@ -70,6 +77,7 @@ public class Tournament {
 	 * Call method play(..) of class Player.
 	 */
 	public void playRound() {
+		
 		// Supply this code!
 	}
 

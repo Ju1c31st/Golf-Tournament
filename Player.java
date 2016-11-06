@@ -1,9 +1,6 @@
 package comp125;
 
 import java.util.Random;
-
-import com.sun.xml.internal.bind.v2.runtime.Name;
-
 /**
  * Class to store family name, handicap and scores
  * for a golf player.
@@ -12,6 +9,7 @@ import com.sun.xml.internal.bind.v2.runtime.Name;
  * and answer Question P1.
  * @author Scott McCallum, September 2016
  * Completed by: 
+ * 44908415, Jonah Lee Skinner
  */
 
 public class Player {
@@ -30,11 +28,15 @@ public class Player {
 	// Question P1. Suppose that handicap = 18.
 	// What are the minimum and maximum values that method variation()
 	// can return?
-	private int variation() {
-		int randomNumber = randomGenerator.nextInt(90);
-		return (randomNumber + handicap)/18 - 2;
-	}
 
+	/*
+	 * The values varation() can return are:
+	 * MAX = 5 & MIN = 0 
+	 */
+	private int variation() {
+		int randomNumber = randomGenerator.nextInt(90); //Max value = 90 and MIN value = 0 
+		return (randomNumber + handicap)/18 - 2; //divides number found above by 18 then -2.
+	}
 	public static final int NUMHOLES = 18;  // NUMHOLES is constant.
 
 	/**
@@ -112,18 +114,18 @@ public class Player {
 	 */
 	public static boolean equalArrays(int [] a, int [] b) {
 		if(a.length != b.length){
-			return false;
+			return false;        //Checks array lengths are equal
 		}else{
-			int i = 0;
-			while(i < a.length){
+			int i = 0; 
+			while(i<a.length){ //A array will have equal length to b array
 				if (a[i] != b[i]){
-					return false;
+					return false;//Checks each element in array is same at same location
 				}
-				i++;
+				i++;             //Keeps track of loops which will end when it exceeds a.length
 			}
 		}
-		return true;
-	}
+		return true;             //Arrays are equal
+	}//DONE
 
 	/**
 	 * Return true if this player has exactly the same
@@ -138,28 +140,25 @@ public class Player {
 	 */
 	public boolean equals(Player other){
 		int check = 0;
-		if(name.equals(other.name) == true){ //Nested if statements which will increase the count of check.
+		if(name.equals(other.name) == true){    //Nested if statements which will increase the count of check.
 			check++;
-			
-			if(this.handicap == other.handicap){//needs to compare Integers
+			if(this.handicap == other.handicap){//Compare Integers
 				check++;
-		
-				if (equalArrays(this.scores, other.scores) == true){
+				if(equalArrays(this.scores, other.scores) == true){
 					check++;
 				}
 			}
 		}
-		if(check == 3){ //if check = 3 ie. all the attributes are the same
+		if(check == 3){                         // -> all 3 the attributes are the same
 			return true;
 		}else{ 
 			return false;
-		}// Modify this code appropriately! 
-	}
-
+		}
+	}//DONE
 
 	/**
 	 * Return appropriate comment for given score and par for hole.
-	 * You can assume that score is not less than 4 below par for hole.
+	 * You can assume that score is not less than 4 below par for hole. //cannot be assumed score is NOT LESS THAN 4!!!!
 	 * For example, if score is 4 below par, return "condor!!!!",
 	 * if score is 3 below par, return "albatross!!!",
 	 * if score is 2 below par, return "eagle!!", etc.
@@ -167,11 +166,39 @@ public class Player {
 	 * @param score
 	 * @param parForHole
 	 * @return appropriate comment for given score and par for hole.
+	 * 
+	 * if score is 1 below par, return "birdie!"
+	 * if score is equal to par, return "par"
+	 * if score is 1 above par, return "bogey"
+	 * if score is 2 above par, return "double bogey"
+	 * if score is >2 above par, return "triple+ bogey"
 	 */
 	public static String comment(int score, int parForHole) {
-		
-		return "Comment needed!"; // Replace by a suitable switch stmt.
-	}
+		String comment = "";
+
+		if(score == parForHole){               //list of all the attributes with associated reward
+			comment = "par";
+		}else{
+			if(score > parForHole){
+			}if(score == (parForHole + 1)){
+				return comment = "bogey";
+			}if(score == (parForHole + 2)){
+				return comment = "double bogey";
+			}if(score > (parForHole + 2)){  
+				return comment = "triple+ bogey";
+			}
+			if(score < parForHole){
+			}if(score == (parForHole - 1)){
+				return comment = "birdie!";
+			}if(score == (parForHole - 2 )){
+				return comment = "eagle!!";
+			}if(score == (parForHole - 3)){
+				return comment = "albatross!!!";
+			}if(score <= (parForHole - 4)){    //for cases such as score = 0 and parForHole = 5
+				return comment = "condor!!!!";
+			}
+		}return comment; 
+	}//DONE
 
 	/**
 	 * Display the player's name and scores.
@@ -195,10 +222,8 @@ public class Player {
 	 */
 	public int totalScore() {
 		int total = 0;
-		/*
-		 * 
-		 */
-		// Complete this code!
+		for(int i = 0; i<scores.length; i++)
+			total = scores[i] + total;
 		return total;
 	}
 
@@ -209,8 +234,12 @@ public class Player {
 	 * @return score for first n holes for this player.
 	 */
 	public int totalScoreRec(int n) {
-		return 0; // Modify this code appropriately!
-	}
+		if(n > 0){                           //base case
+			return n + totalScoreRec(n - 1); //recursive call
+		}else{
+			return 0;
+		}
+	}//DONE
 
 	/**
 	 * Simulate round of golf for this player.
@@ -219,8 +248,11 @@ public class Player {
 	 * @param par
 	 */
 	public void play(int [] par) {
-		// Supply this code!
+		for (int i = 0; i<par.length; i++) { 
+			par[i] = variation();
+		}
 	}
+	// Supply this code!?\\Done\\Checked for changing results
 
 	/*
 	 * Carry out simple test of Player class.
@@ -241,6 +273,9 @@ public class Player {
 		player2.play(par);
 		player2.showScores(par);
 		System.out.println("Total score is " + player2.totalScore());
-		// Add a couple of lines to test method equals.
+		Player player3 = new Player("Norman", 2, myScores);
+		System.out.println("Is another Norman (player3) equal to our Norman (myPlayer)? " + "Answer: " + player3.equals(myPlayer)); // Add a couple of lines to test method equals.
+		System.out.println("Is Scott equal to Ogilvy? " + "Answer " + player2.equals(player1));
+
 	}
 }
