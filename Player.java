@@ -31,7 +31,14 @@ public class Player {
 
 	/*
 	 * The values varation() can return are:
-	 * MAX = 5 & MIN = 0 
+	 * MAX = 3 & MIN = -1
+	 * How did i get this?
+	 * Max randomNumber to be generated is 89 
+	 * Min randomNumber to be generated is 0 
+	 * once the randomNumbers are put through the formula
+	 * ie. (89+18)/18-2 = 3.94 = 3 
+	 * Similarly for min:
+	 * ie. (0+18)/18-2 = -1
 	 */
 	private int variation() {
 		int randomNumber = randomGenerator.nextInt(90); //Max value = 90 and MIN value = 0 
@@ -140,7 +147,7 @@ public class Player {
 	 */
 	public boolean equals(Player other){
 		int check = 0;
-		if(name.equals(other.name) == true){    //Nested if statements which will increase the count of check.
+		if(this.name.equals(other.name) == true){    //Nested if statements which will increase the count of check.
 			check++;
 			if(this.handicap == other.handicap){//Compare Integers
 				check++;
